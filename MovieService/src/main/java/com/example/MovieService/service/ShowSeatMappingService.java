@@ -63,13 +63,13 @@ public class ShowSeatMappingService {
 		Payment payment = new Payment();
 		
 		Booking booking = new Booking();
-		booking.setNumberOfSeats(seatId);
+	//	booking.setNumberOfSeats(seatId);
 		booking.setStatus("booked");
 		bookingRepo.save(booking);
 	
 		
 		Amount += showSeatMapping.getPrice();
-		Amount = Amount + 100;
+		Amount = Amount;
 		
 		payment.setAmount(Amount);
 		payment.setBooking(booking);
