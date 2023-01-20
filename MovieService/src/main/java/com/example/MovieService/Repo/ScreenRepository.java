@@ -7,9 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.example.MovieService.entity.Movies;
 import com.example.MovieService.entity.Screen;
-import com.example.MovieService.entity.Show;
 
 @Repository
 public interface ScreenRepository extends JpaRepository<Screen, Integer>{

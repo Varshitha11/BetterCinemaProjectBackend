@@ -1,13 +1,13 @@
 package com.example.MovieService.entity;
 
 import java.util.List;
-import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -23,9 +23,10 @@ import lombok.NoArgsConstructor;
 public class Show {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int showId;
 	private String day;
-	private String Time;
+	private String time;
 	
 	@OneToMany(targetEntity = ShowSeatMapping.class, cascade = CascadeType.ALL)
 	@JoinColumn(name = "showid_fk", referencedColumnName = "showId")

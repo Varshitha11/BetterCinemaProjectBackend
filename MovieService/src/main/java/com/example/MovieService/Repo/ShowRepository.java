@@ -21,9 +21,4 @@ public interface ShowRepository extends JpaRepository<Show, Integer>{
 	@Query(value = "  select *from show,screen,theatre,movie where show.screenid_fk =screen.screen_id and screen.thscid_fk = theatre.theatre_id and show.movie_id= movie.id and theatre.theatre_id=:theatreId and movie.id=:movieid and show.time=:time" , nativeQuery = true)
     List<Show> getShowsFromMovieTheatreTime(@Param("movieid")   Integer movieid, @Param("theatreId") Integer theatreId,  @Param("time") String time);
 	
-	@Query(value =" select *from movie ,show where show.show_id=:showid", nativeQuery = true)
-	Show getMovieByShow(@Param("showid") Integer showid);
-	
-	
-	
 }
