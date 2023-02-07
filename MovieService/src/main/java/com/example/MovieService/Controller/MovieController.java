@@ -32,7 +32,6 @@ public class MovieController {
 		logger.info("---------movie fetched title:" + title + "------------");
 		return movieService.getMoviesByTitle(title);
 	}
-	
 
 	@GetMapping("/movies/{id}")
 	public Movies getMovieById(@PathVariable Integer id) {
@@ -40,7 +39,6 @@ public class MovieController {
 		logger.info("---------movie fetched with id:" + id + "------------");
 		return movieService.getMovieById(id);
 	}
-	
 
 	@GetMapping("/getAllMovies")
 	List<Movies> getAllMovies() {
@@ -48,7 +46,6 @@ public class MovieController {
 		logger.info("---------All movies fetched------------");
 		return movieService.getAllMovies();
 	}
-	
 
 	@PostMapping("/addMovie")
 	public Movies addMovie(@RequestBody Movies movie) {
@@ -56,7 +53,6 @@ public class MovieController {
 		logger.info("-----------movie added----------");
 		return saveMovie;
 	}
-	
 
 	@GetMapping("/getMoviesFromTheatre/{theatreId}")
 	public List<Movies> getMoviesFromTheatre(@PathVariable("theatreId") int theatreId) {
@@ -66,7 +62,6 @@ public class MovieController {
 		logger.info("-----------movie fetched by theatreId:" + theatreId + "----------");
 		return movies.stream().collect(Collectors.toSet()).stream().toList();
 	}
-	
 
 	@GetMapping("/SearchByTime/{time}")
 	public List<Movies> SearchByTime(@PathVariable("time") String time) {
@@ -74,11 +69,10 @@ public class MovieController {
 		logger.info("-----------movie fetched by time:" + time + "----------");
 		return movies.stream().collect(Collectors.toSet()).stream().toList();
 	}
-	
 
 	@GetMapping("/getMoviesByShowIdAndTime/{showid}")
 	public Movies getMoviesByShowIdAndTime(@PathVariable("showid") Integer showid) {
-		logger.info("-----------movie fetched by showid:" + showid );
+		logger.info("-----------movie fetched by showid:" + showid);
 		return movieService.getMoviesByShowIdAndTime(showid);
 	}
 

@@ -1,13 +1,17 @@
+debug: false
+server:
+    port: 8081
 spring:
   datasource:
-    url: jdbc:oracle:thin:@localhost:1521/xe
-    username: sys as sysdba
-    password: admin@123
-    driver-class-name: oracle.jdbc.OracleDriver
-
- 
+    url: jdbc:mysql://projectdb.cqkso0b1hltx.ap-south-1.rds.amazonaws.com:3306/bettercinemadb
+    username: root
+    password: varshithaK
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
     show-sql: true
     hibernate:
       ddl-auto: update
+      
+ 
+   

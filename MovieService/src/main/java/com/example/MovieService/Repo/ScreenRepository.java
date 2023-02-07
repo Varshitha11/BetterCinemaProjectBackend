@@ -10,15 +10,12 @@ import org.springframework.stereotype.Repository;
 import com.example.MovieService.entity.Screen;
 
 @Repository
-public interface ScreenRepository extends JpaRepository<Screen, Integer>{
-	
+public interface ScreenRepository extends JpaRepository<Screen, Integer> {
 
-	@Query(value = "select * from screen,theatre where screen.thscid_fk = theatre.theatre_id and theatre.theatre_id=:theatreId",nativeQuery = true)
+	@Query(value = "select * from screen,theatre where screen.thscid_fk = theatre.theatre_id and theatre.theatre_id=:theatreId", nativeQuery = true)
 	List<Screen> getScreensFromTheatre(@Param("theatreId") Integer theatreId);
 
-	@Query(value = "  select * from show,screen where show.screenid_fk = screen.screen_id and show.show_id =:showid and show.time =:time" ,nativeQuery = true)
-    Screen getScreenFromShowIdAndTime(@Param("showid") Integer showId, @Param("time") String time);
-	
-	
-	
+	@Query(value = "  select * from shows,screen where shows.screenid_fk = screen.screen_id and shows.show_id =:showid and shows.time =:time", nativeQuery = true)
+	Screen getScreenFromShowIdAndTime(@Param("showid") Integer showId, @Param("time") String time);
+
 }

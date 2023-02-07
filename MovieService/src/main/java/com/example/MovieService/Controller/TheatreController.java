@@ -20,39 +20,37 @@ import ch.qos.logback.classic.Logger;
 @CrossOrigin(origins = "*")
 @RestController
 public class TheatreController {
-	
+
 	@Autowired
 	private TheatreService theatreService;
-	
+
 	Logger logger = (Logger) LoggerFactory.getLogger(TheatreController.class);
-	
+
 	@PostMapping("/addTheatre")
 	public Theatre addTheatre(@RequestBody Theatre theatre) {
 		Theatre addTheatre = theatreService.addTheatres(theatre);
-		
-		 logger.info("---------Theatres Added succesfully------------" );
+
+		logger.info("---------Theatres Added succesfully------------");
 		return addTheatre;
 	}
-	
-	
+
 	@GetMapping("/getAllTheatres")
-	public List<Theatre> getAllTheatres(){
+	public List<Theatre> getAllTheatres() {
 		logger.info("---------All Theatres fetched------------");
 		return theatreService.getAllTheatres();
 	}
-	
 
 	@GetMapping("/theatre/{id}")
 	public Theatre getTheatreById(@PathVariable Integer id) {
 		logger.info("---------theatre fetched with id:" + id + "------------");
 		return theatreService.getTheatreById(id);
 	}
-	
-	
+
 	@GetMapping("/getTheatreFromMovieId/{movieid}")
-	 public List<Theatre> getMoviesFromTheatre(@PathVariable("movieid") int movieid){
-		 List<Theatre> theatre = theatreService.getTheatreFromMovieid(movieid);
-		 logger.info("-----------theatre fetched by movieid:" + movieid + "----------");
-		 return theatre.stream().collect(Collectors.toSet()).stream().toList();
-	 }
+	public List<Theatre> getMoviesFromTheatre(@PathVariable("movieid") int movieid) {
+		List<Theatre> theatre = theatreService.getTheatreFromMovieid(movieid);
+		logger.info("-----------theatre fetched by movieid:" + movieid + "----------");
+		return theatre.stream().collect(Collectors.toSet()).stream().toList();
+	}
+
 }

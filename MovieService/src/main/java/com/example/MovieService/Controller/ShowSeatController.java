@@ -16,22 +16,23 @@ import com.example.MovieService.service.ShowSeatMappingService;
 @CrossOrigin(origins = "*")
 @RestController
 public class ShowSeatController {
-	
+
 	@Autowired
 	private ShowSeatMappingService showSeatService;
-	
-	
+
 	@PostMapping("/bookTickets/{seatId}/{showid}")
-	public ResponseEntity<Object> bookTickets(@RequestBody ShowSeatMapping showseatmap,@PathVariable("seatId") Integer seatId ,@PathVariable("showid") Integer showId) {
-		if(showSeatService.checkIfSeaEmpty(seatId) == "NotAvailable") {
+	public ResponseEntity<Object> bookTickets(@RequestBody ShowSeatMapping showseatmap,
+			@PathVariable("seatId") Integer seatId, @PathVariable("showid") Integer showId) {
+		if (showSeatService.checkIfSeaEmpty(seatId) == "NotAvailable") {
 			return new ResponseEntity<>("Seats are filled", HttpStatus.BAD_REQUEST);
 		}
-	    return new ResponseEntity<>(showSeatService.bookSeat(seatId, showId),HttpStatus.CREATED);
+		return new ResponseEntity<>(showSeatService.bookSeat(seatId, showId), HttpStatus.CREATED);
 	}
-	
+
 	@GetMapping("/findBySeatId/{seatId}")
 	public ShowSeatMapping findBySeatId(@PathVariable("seatId") Integer seatId) {
 		return showSeatService.findBySeatId(seatId);
-		
+
 	}
+
 }

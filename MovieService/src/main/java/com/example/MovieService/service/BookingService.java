@@ -10,17 +10,13 @@ import com.example.MovieService.entity.Booking;
 
 @Service
 public class BookingService {
-	
+
 	@Autowired
 	private BookingRepository bookingRepo;
 
 	public List<Booking> getBookings(String userName) {
-		
-		
+
 		return bookingRepo.findByUserName(userName);
 	}
-	
-	
-	
 
 }

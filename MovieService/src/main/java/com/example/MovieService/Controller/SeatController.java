@@ -18,29 +18,27 @@ import ch.qos.logback.classic.Logger;
 @CrossOrigin(origins = "*")
 @RestController
 public class SeatController {
-    
+
 	@Autowired
 	private SeatService seatService;
-	
+
 	Logger logger = (Logger) LoggerFactory.getLogger(SeatController.class);
 
-	
-	
 	@GetMapping("/getSeats/{showid}/{time}")
-	public List<Seats> getSeats(@PathVariable("showid") Integer showid,@PathVariable("time") String time){
-		
-		List<Seats> seats = seatService.getSeats(showid,time);
-		
-		 logger.info("---------seats fetched for showid:" + showid + " and time:" +time);
-		 
+	public List<Seats> getSeats(@PathVariable("showid") Integer showid, @PathVariable("time") String time) {
+
+		List<Seats> seats = seatService.getSeats(showid, time);
+
+		logger.info("---------seats fetched for showid:" + showid + " and time:" + time);
+
 		return seats.stream().collect(Collectors.toSet()).stream().toList();
-		
+
 	}
-	
+
 	@GetMapping("/Seats/{seatId}")
 	public Seats getSeatsById(@PathVariable Integer seatId) {
-		
-		 logger.info("---------seats fetched for seatId:" + seatId + "------------------- ");
+
+		logger.info("---------seats fetched for seatId:" + seatId + "------------------- ");
 		return seatService.getSeatsById(seatId);
 	}
 

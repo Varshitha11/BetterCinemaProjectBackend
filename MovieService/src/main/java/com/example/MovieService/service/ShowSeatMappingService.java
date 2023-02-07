@@ -55,10 +55,9 @@ public class ShowSeatMappingService {
 		Show show = showRepo.findById(showId).get();
 		Payment payment = new Payment();
 
-		Booking booking = new Booking();
-		// booking.setNumberOfSeats(seatId);
+		Booking booking = new Booking(); // booking.setNumberOfSeats(seatId);
 		booking.setStatus("booked");
-		
+
 		bookingRepo.save(booking);
 
 		Amount += showSeatMapping.getPrice();

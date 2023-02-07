@@ -21,23 +21,23 @@ public class ScreenContoller {
 
 	@Autowired
 	private ScreenService screenService;
-	
+
 	Logger logger = (Logger) LoggerFactory.getLogger(ScreenContoller.class);
 
-	
 	@GetMapping("/getScreensFromTheatre/{theatreId}")
-	 public List<Screen> getScreenFromTheatre(@PathVariable("theatreId") int theatreId){
-		 List<Screen> screen = screenService.getScreenFromTheatre(theatreId);
-		 
-		 logger.info("---------screen fetched theatreId:" + theatreId + "------------");
-		 return screen.stream().collect(Collectors.toSet()).stream().toList();
-	 }
-	
+	public List<Screen> getScreenFromTheatre(@PathVariable("theatreId") int theatreId) {
+		List<Screen> screen = screenService.getScreenFromTheatre(theatreId);
+
+		logger.info("---------screen fetched theatreId:" + theatreId + "------------");
+		return screen.stream().collect(Collectors.toSet()).stream().toList();
+	}
+
 	@GetMapping("/getScreenFromShowIdAndTime/{showid}/{time}")
-	 public Screen getScreenFromShowIdAndTime(@PathVariable("showid") int showid , @PathVariable("time") String time){
-		
-		logger.info("---------screen fetched with showid:" + showid + " and time:" +time);
-		  return screenService.getScreenFromShowIdAndTime(showid, time);
-		 
-	 }
+	public Screen getScreenFromShowIdAndTime(@PathVariable("showid") int showid, @PathVariable("time") String time) {
+
+		logger.info("---------screen fetched with showid:" + showid + " and time:" + time);
+		return screenService.getScreenFromShowIdAndTime(showid, time);
+
+	}
+
 }
