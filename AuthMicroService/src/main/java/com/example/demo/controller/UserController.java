@@ -49,4 +49,6 @@ public class UserController {
 		Optional<User> user = userService.getUserByUserName(userName);
 		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
+	
+	
 }
