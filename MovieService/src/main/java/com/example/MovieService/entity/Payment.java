@@ -20,7 +20,7 @@ public class Payment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int paymentId;
-	private double Amount;
+	private double amount;
 	
 	@OneToOne
 	private Booking booking;

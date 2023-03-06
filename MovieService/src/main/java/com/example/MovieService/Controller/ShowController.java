@@ -24,37 +24,39 @@ public class ShowController {
 
 	Logger logger = (Logger) LoggerFactory.getLogger(ShowController.class);
 
-	@GetMapping("/getShowsFromMovieid/{movieid}")
-	public List<Show> getShowsFromMovieid(@PathVariable("movieid") int movieid) {
-		List<Show> shows = showService.getShowsFromMovieid(movieid);
+//	@GetMapping("/getShowsByMovieId/{movieId}")
+//	public List<Show> getShowsByMovieId(@PathVariable("movieId") int movieId) {
+//
+//		List<Show> shows = showService.getShowsByMovieId(movieId);
+//		logger.info("---------shows fetched for movieid: " + movied + "------------");
+//		return shows.stream().collect(Collectors.toSet()).stream().toList();
+//	}
 
-		logger.info("---------shows fetched for movieid:" + movieid + "------------");
-
-		return shows.stream().collect(Collectors.toSet()).stream().toList();
-	}
-
-	@GetMapping("/getShowFromMovieTheatreTime/{movieid}/{theatreId}")
-	public List<Show> getShowsFromMovieidAndTheatreId(@PathVariable("movieid") int movieid,
+	
+	@GetMapping("/getShowsByMovieTheatreAndTime/{movieId}/{theatreId}")
+	public List<Show> getShowsByMovieAndTheatre(@PathVariable("movieId") int movieId,
 			@PathVariable("theatreId") int theatreId) {
-		List<Show> shows = showService.getShowsFromMovieidAndTheatreId(movieid, theatreId);
-
-		logger.info("---------shows fetched for movieid:" + movieid + "theatreId:" + theatreId + "------------");
+		
+		List<Show> shows = showService.getShowsByMovieAndTheatre(movieId, theatreId);
+		logger.info("---------shows fetched for movieId: " + movieId + " theatreId: " + theatreId + "------------");
 		return shows.stream().collect(Collectors.toSet()).stream().toList();
 	}
+	
 
-	@GetMapping("/getShowFromMovieTheatreTime/{movieid}/{theatreId}/{time}")
-	public List<Show> getShowFromMovieTheatreTime(@PathVariable("movieid") int movieid,
+	@GetMapping("/getShowsByMovieTheatreAndTime/{movieId}/{theatreId}/{time}")
+	public List<Show> getShowsByMovieTheatreAndTime(@PathVariable("movieId") int movieId,
 			@PathVariable("theatreId") Integer theatreId, @PathVariable("time") String time) {
-		List<Show> shows = showService.getShowsFromMovieTheatreTime(movieid, time, theatreId);
-
-		logger.info("---------shows fetched for movieid:" + movieid + "theatreId:" + theatreId + "time:" + time
+		
+		List<Show> shows = showService.getShowsByMovieTheatreAndTime(movieId, time, theatreId);
+		logger.info("---------shows fetched for movieid: " + movieId + " theatreId: " + theatreId + " time: " + time
 				+ "------------");
 		return shows.stream().collect(Collectors.toSet()).stream().toList();
 	}
+	
 
-	@GetMapping("/shows/{showid}")
-	public Show getShowById(@PathVariable Integer showid) {
-		return showService.getShowById(showid);
+	@GetMapping("/shows/{showId}")
+	public Show getShowById(@PathVariable Integer showId) {
+		return showService.getShowById(showId);
 	}
 
 }

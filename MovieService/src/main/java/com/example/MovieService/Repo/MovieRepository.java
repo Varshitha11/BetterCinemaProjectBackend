@@ -15,12 +15,12 @@ public interface MovieRepository extends JpaRepository<Movies, Integer> {
 	public List<Movies> findByTitle(String title);
 
 	@Query(value = "SELECT * FROM movie,shows,screen,theatre where movie.id = shows.movie_id and shows.screenid_fk = screen.screen_id and screen.thscid_fk = theatre.theatre_id and theatre.theatre_id =:theatreId", nativeQuery = true)
-	List<Movies> getMoviesFromTheatre(@Param("theatreId") Integer theatreId);
+	List<Movies> getMoviesByTheatre(@Param("theatreId") Integer theatreId);
 
 	@Query(value = " SELECT * FROM movie,shows where movie.id = shows.movie_id and shows.time=:time", nativeQuery = true)
 	List<Movies> findMovieByTime(String time);
 
-	@Query(value = "SELECT * FROM movie,shows where shows.movie_id=movie.id and shows.show_id =:showid ", nativeQuery = true)
-	Movies getMoviesByShowIdAndTime(@Param("showid") Integer showid);
+	@Query(value = "SELECT * FROM movie,shows where shows.movie_id=movie.id and shows.show_id =:showId ", nativeQuery = true)
+	Movies getMoviesByShowAndTime(@Param("showId") Integer showId);
 
 }

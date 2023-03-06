@@ -28,8 +28,6 @@ public class UserService {
 
 	public void initRoleAndUser() {
 
-
-
 		Role userRole = new Role();
 		userRole.setRoleName("User");
 		userRole.setRoleDescription("Default role for newly created record");

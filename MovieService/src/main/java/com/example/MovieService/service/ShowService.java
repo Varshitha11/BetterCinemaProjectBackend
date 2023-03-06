@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.MovieService.Repo.ShowRepository;
 import com.example.MovieService.entity.Show;
-import com.example.MovieService.exception.BussinessException;
-import com.example.MovieService.exception.NoSuchElementException;
+import com.example.MovieService.exception.ShowNotFoundException;
+
 
 @Service
 public class ShowService {
@@ -16,30 +16,23 @@ public class ShowService {
 	@Autowired
 	private ShowRepository showRepository;
 
-	public List<Show> getShowsFromMovieid(Integer movieid) {
-		List<Show> shows = showRepository.getShowsFromMovieid(movieid);
+
+	public List<Show> getShowsByMovieAndTheatre(Integer movieId, Integer theatreId) {
+		List<Show> shows = showRepository.getShowsByMovieAndTheatre(movieId, theatreId);
 		if (shows.isEmpty()) {
-			throw new BussinessException("Hey No show found for movieid: " + movieid);
+			throw new ShowNotFoundException("Hey No show found for movieId: " + movieId + " and theatreId: " + theatreId);
 		}
 		return shows;
 	}
 
-	public List<Show> getShowsFromMovieidAndTheatreId(Integer movieid, Integer theatreId) {
-		List<Show> shows = showRepository.getShowsFromMovieAndTheatre(movieid, theatreId);
-		if (shows.isEmpty()) {
-			throw new BussinessException("Hey No show found for movieid: " + movieid + " and theatreId:" + theatreId);
-		}
+	public List<Show> getShowsByMovieTheatreAndTime(Integer movieId, String time, Integer theatreId) {
+		List<Show> shows = showRepository.getShowsByMovieTheatreAndTime(movieId, theatreId, time);
 		return shows;
 	}
 
-	public List<Show> getShowsFromMovieTheatreTime(Integer movieid, String time, Integer theatreId) {
-		List<Show> shows = showRepository.getShowsFromMovieTheatreTime(movieid, theatreId, time);
-		return shows;
-	}
-
-	public Show getShowById(Integer showid) {
-		return showRepository.findById(showid)
-				.orElseThrow(() -> new NoSuchElementException("No Show found with id =" + showid));
+	public Show getShowById(Integer showId) {
+		return showRepository.findById(showId)
+				.orElseThrow(() -> new ShowNotFoundException("No Show found with id = " + showId));
 	}
 
 }

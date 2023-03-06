@@ -26,17 +26,18 @@ public class ScreenContoller {
 
 	@GetMapping("/getScreensFromTheatre/{theatreId}")
 	public List<Screen> getScreenFromTheatre(@PathVariable("theatreId") int theatreId) {
+		
 		List<Screen> screen = screenService.getScreenFromTheatre(theatreId);
-
-		logger.info("---------screen fetched theatreId:" + theatreId + "------------");
+		logger.info("---screen fetched with theatreId: " + theatreId + "---");
 		return screen.stream().collect(Collectors.toSet()).stream().toList();
 	}
 
-	@GetMapping("/getScreenFromShowIdAndTime/{showid}/{time}")
-	public Screen getScreenFromShowIdAndTime(@PathVariable("showid") int showid, @PathVariable("time") String time) {
+	
+	@GetMapping("/getScreenFromShowAndTime/{showId}/{time}")
+	public Screen getScreenFromShowAndTime(@PathVariable("showId") int showId, @PathVariable("time") String time) {
 
-		logger.info("---------screen fetched with showid:" + showid + " and time:" + time);
-		return screenService.getScreenFromShowIdAndTime(showid, time);
+		logger.info("---------screen fetched with showId: " + showId + " and time: " + time);
+		return screenService.getScreenFromShowAndTime(showId, time);
 
 	}
 

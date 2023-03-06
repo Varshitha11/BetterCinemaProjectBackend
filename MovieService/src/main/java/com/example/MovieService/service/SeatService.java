@@ -7,8 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.MovieService.Repo.SeatRepository;
 import com.example.MovieService.entity.Seats;
-import com.example.MovieService.exception.BussinessException;
-import com.example.MovieService.exception.NoSuchElementException;
+import com.example.MovieService.exception.SeatNotFoundException;
 
 @Service
 public class SeatService {
@@ -16,16 +15,16 @@ public class SeatService {
 	@Autowired
 	private SeatRepository seatRepo;
 
-	public List<Seats> getSeats(Integer showid, String time) {
-		List<Seats> seats = seatRepo.getSeats(showid, time);
+	public List<Seats> getSeats(Integer showId, String time) {
+		List<Seats> seats = seatRepo.getSeats(showId, time);
 		if (seats.isEmpty()) {
-			throw new BussinessException("Seats not found with showid:" + showid + " and time:" + time);
+			throw new SeatNotFoundException("Seats not found with showId: " + showId + " and time: " + time);
 		}
 		return seats;
 	}
 
 	public Seats getSeatsById(Integer seatId) {
-		return seatRepo.findById(seatId).orElseThrow(() -> new NoSuchElementException("No Seat with id =" + seatId));
+		return seatRepo.findById(seatId).orElseThrow(() -> new SeatNotFoundException("No Seat found with seatId = " + seatId));
 	}
 
 }

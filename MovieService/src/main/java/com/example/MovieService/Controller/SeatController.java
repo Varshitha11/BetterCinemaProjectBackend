@@ -24,21 +24,20 @@ public class SeatController {
 
 	Logger logger = (Logger) LoggerFactory.getLogger(SeatController.class);
 
-	@GetMapping("/getSeats/{showid}/{time}")
-	public List<Seats> getSeats(@PathVariable("showid") Integer showid, @PathVariable("time") String time) {
+	
+	@GetMapping("/getSeats/{showId}/{time}")
+	public List<Seats> getSeats(@PathVariable("showId") Integer showId, @PathVariable("time") String time) {
 
-		List<Seats> seats = seatService.getSeats(showid, time);
-
-		logger.info("---------seats fetched for showid:" + showid + " and time:" + time);
-
+		List<Seats> seats = seatService.getSeats(showId, time);
+		logger.info("-----seats fetched for showid:" + showId + " and time:" + time+"-----");
 		return seats.stream().collect(Collectors.toSet()).stream().toList();
-
 	}
 
-	@GetMapping("/Seats/{seatId}")
+	
+	@GetMapping("/seats/{seatId}")
 	public Seats getSeatsById(@PathVariable Integer seatId) {
 
-		logger.info("---------seats fetched for seatId:" + seatId + "------------------- ");
+		logger.info("----seats fetched for seatId: " + seatId + "---- ");
 		return seatService.getSeatsById(seatId);
 	}
 

@@ -12,6 +12,8 @@ import com.example.MovieService.entity.Payment;
 import com.example.MovieService.entity.Seats;
 import com.example.MovieService.entity.Show;
 import com.example.MovieService.entity.ShowSeatMapping;
+import com.example.MovieService.exception.MovieNotFoundException;
+import com.example.MovieService.exception.SeatNotFoundException;
 
 @Service
 public class ShowSeatMappingService {
@@ -38,7 +40,6 @@ public class ShowSeatMappingService {
 
 	public Payment bookSeat(Integer seatId, Integer showId) {
 		ShowSeatMapping showSeatMapping = showSeatRepo.getById(seatId);
-		Seats seat = new Seats();
 		try {
 			showSeatRepo.setSeatById(seatId);
 			showSeatMapping.setStatus("notavailable");
@@ -50,7 +51,7 @@ public class ShowSeatMappingService {
 
 		showSeatRepo.save(showSeatMapping);
 
-		double Amount = 0;
+		double amount = 0;
 
 		Show show = showRepo.findById(showId).get();
 		Payment payment = new Payment();
@@ -60,9 +61,9 @@ public class ShowSeatMappingService {
 
 		bookingRepo.save(booking);
 
-		Amount += showSeatMapping.getPrice();
+		amount += showSeatMapping.getPrice();
 
-		payment.setAmount(Amount);
+		payment.setAmount(amount);
 		payment.setBooking(booking);
 		paymentRepo.save(payment);
 
@@ -71,7 +72,11 @@ public class ShowSeatMappingService {
 	}
 
 	public ShowSeatMapping findBySeatId(Integer seatId) {
-		return showSeatRepo.findBySeatId(seatId);
+		ShowSeatMapping showSeat = showSeatRepo.findBySeatId(seatId);
+		if(showSeat == null) {
+			throw new SeatNotFoundException("no seat found with seatId: " + seatId);
+		}
+		return showSeat;
 	}
 
 }

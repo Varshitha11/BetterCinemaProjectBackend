@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.MovieService.Repo.ScreenRepository;
 import com.example.MovieService.entity.Screen;
-import com.example.MovieService.exception.BussinessException;
+import com.example.MovieService.exception.ScreenNotFoundException;
 
 @Service
 public class ScreenService {
@@ -18,15 +18,15 @@ public class ScreenService {
 	public List<Screen> getScreenFromTheatre(Integer theatreId) {
 		List<Screen> screen = screenRepo.getScreensFromTheatre(theatreId);
 		if (screen.isEmpty()) {
-			throw new BussinessException("no Screen found with theatreid:" + theatreId);
+			throw new ScreenNotFoundException("no Screen found with theatreId: " + theatreId);
 		}
 		return screen;
 	}
 
-	public Screen getScreenFromShowIdAndTime(Integer showid, String time) {
-		Screen screen = screenRepo.getScreenFromShowIdAndTime(showid, time);
+	public Screen getScreenFromShowAndTime(Integer showId, String time) {
+		Screen screen = screenRepo.getScreenFromShowAndTime(showId, time);
 		if (screen == null) {
-			throw new NullPointerException("no screen found with showid:" + showid + " and time :" + time);
+			throw new ScreenNotFoundException("no screen found with showId: " + showId + " and time : " + time);
 		}
 		return screen;
 	}

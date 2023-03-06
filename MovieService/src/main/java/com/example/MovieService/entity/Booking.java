@@ -24,12 +24,12 @@ public class Booking {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int BookingId;
-	private int NumberOfSeats;
+	private int bookingId;
+	private int numberOfSeats;
 	private String status;
 	
 	@OneToMany(targetEntity = ShowSeatMapping.class, cascade = CascadeType.ALL)
-	@JoinColumn(name = "ssmId_fk", referencedColumnName = "BookingId")
+	@JoinColumn(name = "ssmId_fk", referencedColumnName = "bookingId")
 	private List<ShowSeatMapping> showSeatMappings;
 	
 	@ManyToOne(targetEntity = User.class)

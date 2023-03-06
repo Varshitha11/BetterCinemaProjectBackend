@@ -1,11 +1,11 @@
 server:
-    port: 8083
+    port: 8089
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://projectdb.cqkso0b1hltx.ap-south-1.rds.amazonaws.com:3306/bettercinemadb
+    url: jdbc:mysql://localhost:3306/bettercinemadb
     username: root
-    password: varshithaK
+    password: Root@123
   main:
     allow-circular-references: true
   jpa:

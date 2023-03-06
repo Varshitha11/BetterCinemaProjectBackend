@@ -28,28 +28,34 @@ public class TheatreController {
 
 	@PostMapping("/addTheatre")
 	public Theatre addTheatre(@RequestBody Theatre theatre) {
+		
 		Theatre addTheatre = theatreService.addTheatres(theatre);
-
-		logger.info("---------Theatres Added succesfully------------");
+        logger.info("---------Theatres added succesfully------------");
 		return addTheatre;
 	}
 
+	
 	@GetMapping("/getAllTheatres")
 	public List<Theatre> getAllTheatres() {
-		logger.info("---------All Theatres fetched------------");
+		
+		logger.info("---------All theatres fetched------------");
 		return theatreService.getAllTheatres();
 	}
+	
 
-	@GetMapping("/theatre/{id}")
-	public Theatre getTheatreById(@PathVariable Integer id) {
-		logger.info("---------theatre fetched with id:" + id + "------------");
-		return theatreService.getTheatreById(id);
+	@GetMapping("/theatre/{theatreId}")
+	public Theatre getTheatreById(@PathVariable Integer theatreId) {
+		
+		logger.info("---------theatre fetched with theatreId:" + theatreId + "------------");
+		return theatreService.getTheatreById(theatreId);
 	}
+	
 
-	@GetMapping("/getTheatreFromMovieId/{movieid}")
-	public List<Theatre> getMoviesFromTheatre(@PathVariable("movieid") int movieid) {
-		List<Theatre> theatre = theatreService.getTheatreFromMovieid(movieid);
-		logger.info("-----------theatre fetched by movieid:" + movieid + "----------");
+	@GetMapping("/getTheatreByMovieId/{movieId}")
+	public List<Theatre> getTheatreByMovieId(@PathVariable("movieId") int movieId) {
+		
+		List<Theatre> theatre = theatreService.getTheatreByMovieId(movieId);
+		logger.info("-----------theatre fetched by movieId:" + movieId + "----------");
 		return theatre.stream().collect(Collectors.toSet()).stream().toList();
 	}
 

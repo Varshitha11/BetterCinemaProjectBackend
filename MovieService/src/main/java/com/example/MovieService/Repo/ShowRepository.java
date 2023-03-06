@@ -12,14 +12,14 @@ import com.example.MovieService.entity.Show;
 @Repository
 public interface ShowRepository extends JpaRepository<Show, Integer> {
 
-	@Query(value = " SELECT *FROM movie join shows ON movie.id = shows.movie_id where shows.movie_id =:movieid", nativeQuery = true)
-	List<Show> getShowsFromMovieid(@Param("movieid") Integer movieid);
+//	@Query(value = " SELECT *FROM movie join shows ON movie.id = shows.movie_id where shows.movie_id =:movieid", nativeQuery = true)
+//	List<Show> getShowsFromMovieid(@Param("movieid") Integer movieid);
 
-	@Query(value = "  select *from shows,screen,theatre,movie where shows.screenid_fk =screen.screen_id and screen.thscid_fk = theatre.theatre_id and shows.movie_id= movie.id and theatre.theatre_id=:theatreId and movie.id=:movieid", nativeQuery = true)
-	List<Show> getShowsFromMovieAndTheatre(@Param("movieid") Integer movieid, @Param("theatreId") Integer theatreId);
+	@Query(value = "  select *from shows,screen,theatre,movie where shows.screenid_fk =screen.screen_id and screen.thscid_fk = theatre.theatre_id and shows.movie_id= movie.id and theatre.theatre_id=:theatreId and movie.id=:movieId", nativeQuery = true)
+	List<Show> getShowsByMovieAndTheatre(@Param("movieId") Integer movieId, @Param("theatreId") Integer theatreId);
 
-	@Query(value = "  select *from shows,screen,theatre,movie where shows.screenid_fk =screen.screen_id and screen.thscid_fk = theatre.theatre_id and shows.movie_id= movie.id and theatre.theatre_id=:theatreId and movie.id=:movieid and shows.time=:time", nativeQuery = true)
-	List<Show> getShowsFromMovieTheatreTime(@Param("movieid") Integer movieid, @Param("theatreId") Integer theatreId,
+	@Query(value = "  select *from shows,screen,theatre,movie where shows.screenid_fk =screen.screen_id and screen.thscid_fk = theatre.theatre_id and shows.movie_id= movie.id and theatre.theatre_id=:theatreId and movie.id=:movieId and shows.time=:time", nativeQuery = true)
+	List<Show> getShowsByMovieTheatreAndTime(@Param("movieId") Integer movieId, @Param("theatreId") Integer theatreId,
 			@Param("time") String time);
 
 }
