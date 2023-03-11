@@ -1,6 +1,7 @@
 package com.example.MovieService.Repo;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -22,5 +23,4 @@ public interface MovieRepository extends JpaRepository<Movies, Integer> {
 
 	@Query(value = "SELECT * FROM movie,shows where shows.movie_id=movie.id and shows.show_id =:showId ", nativeQuery = true)
 	Movies getMoviesByShowAndTime(@Param("showId") Integer showId);
-
 }

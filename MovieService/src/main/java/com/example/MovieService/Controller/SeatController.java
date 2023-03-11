@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.MovieService.entity.Seats;
+import com.example.MovieService.exception.SeatNotFoundException;
 import com.example.MovieService.service.SeatService;
 
 import ch.qos.logback.classic.Logger;
@@ -25,17 +26,17 @@ public class SeatController {
 	Logger logger = (Logger) LoggerFactory.getLogger(SeatController.class);
 
 	
-	@GetMapping("/getSeats/{showId}/{time}")
-	public List<Seats> getSeats(@PathVariable("showId") Integer showId, @PathVariable("time") String time) {
+	@GetMapping("/getSeats/{showId}")
+	public List<Seats> getSeats(@PathVariable("showId") Integer showId) throws SeatNotFoundException {
 
-		List<Seats> seats = seatService.getSeats(showId, time);
-		logger.info("-----seats fetched for showid:" + showId + " and time:" + time+"-----");
+		List<Seats> seats = seatService.getSeats(showId);
+		logger.info("-----seats fetched for showid:" + showId + "-----");
 		return seats.stream().collect(Collectors.toSet()).stream().toList();
 	}
 
 	
 	@GetMapping("/seats/{seatId}")
-	public Seats getSeatsById(@PathVariable Integer seatId) {
+	public Seats getSeatsById(@PathVariable Integer seatId) throws SeatNotFoundException {
 
 		logger.info("----seats fetched for seatId: " + seatId + "---- ");
 		return seatService.getSeatsById(seatId);

@@ -15,15 +15,16 @@ public class SeatService {
 	@Autowired
 	private SeatRepository seatRepo;
 
-	public List<Seats> getSeats(Integer showId, String time) {
-		List<Seats> seats = seatRepo.getSeats(showId, time);
+	public List<Seats> getSeats(Integer showId) throws SeatNotFoundException {
+		List<Seats> seats = seatRepo.getSeats(showId);
+	    System.out.println(seats.size());
 		if (seats.isEmpty()) {
-			throw new SeatNotFoundException("Seats not found with showId: " + showId + " and time: " + time);
+			throw new SeatNotFoundException("Seats not found with showId: " + showId );
 		}
 		return seats;
 	}
 
-	public Seats getSeatsById(Integer seatId) {
+	public Seats getSeatsById(Integer seatId) throws SeatNotFoundException {
 		return seatRepo.findById(seatId).orElseThrow(() -> new SeatNotFoundException("No Seat found with seatId = " + seatId));
 	}
 

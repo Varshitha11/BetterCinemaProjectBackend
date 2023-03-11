@@ -17,7 +17,7 @@ public class ShowService {
 	private ShowRepository showRepository;
 
 
-	public List<Show> getShowsByMovieAndTheatre(Integer movieId, Integer theatreId) {
+	public List<Show> getShowsByMovieAndTheatre(Integer movieId, Integer theatreId) throws ShowNotFoundException {
 		List<Show> shows = showRepository.getShowsByMovieAndTheatre(movieId, theatreId);
 		if (shows.isEmpty()) {
 			throw new ShowNotFoundException("Hey No show found for movieId: " + movieId + " and theatreId: " + theatreId);
@@ -30,7 +30,7 @@ public class ShowService {
 		return shows;
 	}
 
-	public Show getShowById(Integer showId) {
+	public Show getShowById(Integer showId) throws ShowNotFoundException {
 		return showRepository.findById(showId)
 				.orElseThrow(() -> new ShowNotFoundException("No Show found with id = " + showId));
 	}

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.MovieService.entity.Screen;
+import com.example.MovieService.exception.ScreenNotFoundException;
 import com.example.MovieService.service.ScreenService;
 
 import ch.qos.logback.classic.Logger;
@@ -25,7 +26,7 @@ public class ScreenContoller {
 	Logger logger = (Logger) LoggerFactory.getLogger(ScreenContoller.class);
 
 	@GetMapping("/getScreensFromTheatre/{theatreId}")
-	public List<Screen> getScreenFromTheatre(@PathVariable("theatreId") int theatreId) {
+	public List<Screen> getScreenFromTheatre(@PathVariable("theatreId") int theatreId) throws ScreenNotFoundException {
 		
 		List<Screen> screen = screenService.getScreenFromTheatre(theatreId);
 		logger.info("---screen fetched with theatreId: " + theatreId + "---");
@@ -33,11 +34,11 @@ public class ScreenContoller {
 	}
 
 	
-	@GetMapping("/getScreenFromShowAndTime/{showId}/{time}")
-	public Screen getScreenFromShowAndTime(@PathVariable("showId") int showId, @PathVariable("time") String time) {
+	@GetMapping("/getScreenFromShowAndTime/{showId}")
+	public Screen getScreenFromShowAndTime(@PathVariable("showId") int showId) throws ScreenNotFoundException {
 
-		logger.info("---------screen fetched with showId: " + showId + " and time: " + time);
-		return screenService.getScreenFromShowAndTime(showId, time);
+		logger.info("---------screen fetched with showId: " + showId );
+		return screenService.getScreenFromShowAndTime(showId);
 
 	}
 

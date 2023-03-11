@@ -1,6 +1,6 @@
 package com.example.MovieService.exception;
 
-public class TheatreNotFoundException  extends RuntimeException{
+public class TheatreNotFoundException  extends Exception{
 
 	private String message;
 	

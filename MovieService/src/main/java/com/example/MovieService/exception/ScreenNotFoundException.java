@@ -1,6 +1,6 @@
 package com.example.MovieService.exception;
 
-public class ScreenNotFoundException extends RuntimeException{
+public class ScreenNotFoundException extends Exception{
 
 	/**
 	 * 

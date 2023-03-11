@@ -15,7 +15,7 @@ public class TheatreService {
 	@Autowired
 	private TheatreRepository theatreRepository;
 
-	public List<Theatre> getAllTheatres() {
+	public List<Theatre> getAllTheatres() throws TheatreNotFoundException {
 		List<Theatre> theatres = theatreRepository.findAll();
 		if (theatres.isEmpty()) {
 			throw new TheatreNotFoundException("Hey theatres list is empty");
@@ -28,14 +28,15 @@ public class TheatreService {
 
 	}
 
-	public Theatre getTheatreById(Integer theatreId) {
+	public Theatre getTheatreById(Integer theatreId) throws TheatreNotFoundException {
 		return theatreRepository.findById(theatreId)
 				.orElseThrow(() -> new TheatreNotFoundException("No such theatre with id = " + theatreId));
 				
 	}
 
-	public List<Theatre> getTheatreByMovieId(Integer movieId) {
+	public List<Theatre> getTheatreByMovieId(Integer movieId) throws TheatreNotFoundException {
 		List<Theatre> theatre = theatreRepository.getTheatreByMovieId(movieId);
+		System.out.println(theatre.size());
 		if (theatre.isEmpty()) {
 			throw new TheatreNotFoundException("no theatre found with movieid = " + movieId);
 		}

@@ -1,6 +1,6 @@
 package com.example.MovieService.exception;
 
-public class SeatNotFoundException extends RuntimeException {
+public class SeatNotFoundException extends Exception {
 
 	/**
 	 * 

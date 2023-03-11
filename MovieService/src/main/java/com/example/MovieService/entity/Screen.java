@@ -34,7 +34,6 @@ public class Screen {
 	@OneToMany(targetEntity = Seats.class, cascade = CascadeType.ALL)
 	@JoinColumn(name = "scseid__fk", referencedColumnName = "screenId")
 	private List<Seats> seats;
-
-
+	
 	
 }

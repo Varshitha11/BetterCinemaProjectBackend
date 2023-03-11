@@ -30,7 +30,7 @@ public class MovieController {
 	
 
 	@GetMapping("/movie/{title}")
-	public List<Movies> getMovieByTitle(@RequestParam("title") String title) {
+	public List<Movies> getMovieByTitle(@PathVariable("title") String title) throws MovieNotFoundException {
 
 		logger.info("---movie fetched with title: " + title + "---");
 		return movieService.getMoviesByTitle(title);
@@ -38,28 +38,22 @@ public class MovieController {
 	
 
 	@GetMapping("/movies/{id}")
-	public Movies getMovieById(@PathVariable Integer id) {
+	public Movies getMovieShowById(@PathVariable Integer id) throws MovieNotFoundException {
 		
-        Movies movie = null;
-		try {
-			movie = movieService.getMovieById(id);
+       Movies movie = movieService.getMovieShowById(id);
 			logger.info("---movie fetched with id: " + id + "---");
-			}
-		catch(Exception e){
-			throw new MovieNotFoundException("movie with id " + id + " dosen't exist");
-		}
-		return movie;
+		return  movie;
 	}
 	
 
 	@GetMapping("/getAllMovies")
-	List<Movies> getAllMovies() {
+	List<Movies> getAllMovies() throws MovieNotFoundException {
 		return movieService.getAllMovies();
 	}
 	
 
 	@PostMapping("/addMovie")
-	public Movies addMovie(@RequestBody Movies movie) {
+	public Movies addMovie(@RequestBody Movies movie) throws MovieNotFoundException {
 		
 		Movies saveMovie = movieService.saveMovie(movie);
 		return saveMovie;
@@ -67,7 +61,7 @@ public class MovieController {
 
 	
 	@GetMapping("/getMoviesByTheatreId/{theatreId}")
-	public List<Movies> getMoviesByTheatreId(@PathVariable("theatreId") int theatreId) {
+	public List<Movies> getMoviesByTheatreId(@PathVariable("theatreId") int theatreId) throws MovieNotFoundException {
 
 		List<Movies> movies = movieService.getMoviesByTheatre(theatreId);
 		logger.info("---movie fetched by theatreId: " + theatreId + "---");
@@ -76,7 +70,7 @@ public class MovieController {
 
 	
 	@GetMapping("/SearchByTime/{time}")
-	public List<Movies> searchByTime(@PathVariable("time") String time) {
+	public List<Movies> searchByTime(@PathVariable("time") String time) throws MovieNotFoundException {
 		
 		List<Movies> movies = movieService.getMoviesByTime(time);
 		logger.info("-----------movie fetched by time: " + time + "----------");
@@ -85,7 +79,7 @@ public class MovieController {
 
 	
 	@GetMapping("/getMoviesByShowAndTime/{showId}")
-	public Movies getMoviesByShowAndTime(@PathVariable("showId") Integer showId) {
+	public Movies getMoviesByShowAndTime(@PathVariable("showId") Integer showId) throws MovieNotFoundException {
 		
 		return movieService.getMoviesByShowAndTime(showId);
 	}

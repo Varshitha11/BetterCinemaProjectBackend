@@ -15,7 +15,7 @@ public class MovieService {
 	@Autowired
 	private MovieRepository movieRepo;
 
-	public List<Movies> getMoviesByTitle(String title){
+	public List<Movies> getMoviesByTitle(String title) throws MovieNotFoundException{
 		List<Movies> movies = movieRepo.findByTitle(title);
 		if (movies.isEmpty()) {
 			throw new MovieNotFoundException("no movie with title = " + title + " found");
@@ -24,12 +24,17 @@ public class MovieService {
 	}
 	
 
-	public Movies getMovieById(Integer id) {
-		return movieRepo.findById(id).get();
+	public Movies getMovieShowById(Integer id) throws MovieNotFoundException {
+	Movies movie = movieRepo.findById(id).get();
+	if(movie == null) {
+		throw new MovieNotFoundException("no movie with id = " + id + " found");
+	}
+	return movie;
+		
 	}
 
 	
-	public List<Movies> getAllMovies() {
+	public List<Movies> getAllMovies() throws MovieNotFoundException {
 		List<Movies> movies = movieRepo.findAll();
 		if (movies.isEmpty()) {
 			throw new MovieNotFoundException("Hey list is empty");
@@ -38,7 +43,7 @@ public class MovieService {
 	}
 
 	
-	public Movies saveMovie(Movies movie) {
+	public Movies saveMovie(Movies movie) throws MovieNotFoundException {
 
 		if (movie.getTitle().isEmpty() || movie.getDescription().isEmpty() || movie.getLanguage().isEmpty()
 				|| movie.getImage().isEmpty()) {
@@ -48,7 +53,7 @@ public class MovieService {
 	}
 	
 
-	public List<Movies> getMoviesByTheatre(Integer theatreId) {
+	public List<Movies> getMoviesByTheatre(Integer theatreId) throws MovieNotFoundException {
 		List<Movies> movies = movieRepo.getMoviesByTheatre(theatreId);
 		if (movies.isEmpty()) {
 			throw new MovieNotFoundException("no movie found with theatreId = " + theatreId);
@@ -57,7 +62,7 @@ public class MovieService {
 	}
 
 	
-	public List<Movies> getMoviesByTime(String time) {
+	public List<Movies> getMoviesByTime(String time) throws MovieNotFoundException {
 		List<Movies> movies = movieRepo.findMovieByTime(time);
 		if (movies.isEmpty()) {
 			throw new MovieNotFoundException("no movie found with time = " + time);
@@ -66,7 +71,7 @@ public class MovieService {
 	}
 
 	
-	public Movies getMoviesByShowAndTime(Integer showId) {
+	public Movies getMoviesByShowAndTime(Integer showId) throws MovieNotFoundException {
 		Movies movie = movieRepo.getMoviesByShowAndTime(showId);
 		if (movie == null) {
 			throw new MovieNotFoundException("no movie found with showId: " + showId);

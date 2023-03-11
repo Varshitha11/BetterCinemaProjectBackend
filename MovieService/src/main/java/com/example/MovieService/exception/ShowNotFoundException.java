@@ -1,6 +1,6 @@
 package com.example.MovieService.exception;
 
-public class ShowNotFoundException extends RuntimeException {
+public class ShowNotFoundException extends Exception {
 
 	/**
 	 * 

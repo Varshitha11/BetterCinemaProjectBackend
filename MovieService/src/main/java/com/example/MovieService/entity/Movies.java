@@ -35,6 +35,7 @@ public class Movies {
 	@OneToMany(targetEntity = Show.class, cascade = CascadeType.ALL)
 	@JoinColumn(name = "movieId", referencedColumnName = "id")
 	private List<Show> shows;
+	
 
 	
 }

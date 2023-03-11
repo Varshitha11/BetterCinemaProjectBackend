@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.MovieService.entity.ShowSeatMapping;
+import com.example.MovieService.exception.SeatNotFoundException;
 import com.example.MovieService.service.ShowSeatMappingService;
 
 @CrossOrigin(origins = "*")
@@ -32,7 +33,7 @@ public class ShowSeatMappingController {
 	
 
 	@GetMapping("/findBySeatId/{seatId}")
-	public ShowSeatMapping findBySeatId(@PathVariable("seatId") Integer seatId) {
+	public ShowSeatMapping findBySeatId(@PathVariable("seatId") Integer seatId) throws SeatNotFoundException {
 		return showSeatService.findBySeatId(seatId);
 	}
 

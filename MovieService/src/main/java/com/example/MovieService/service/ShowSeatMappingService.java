@@ -71,7 +71,7 @@ public class ShowSeatMappingService {
 
 	}
 
-	public ShowSeatMapping findBySeatId(Integer seatId) {
+	public ShowSeatMapping findBySeatId(Integer seatId) throws SeatNotFoundException {
 		ShowSeatMapping showSeat = showSeatRepo.findBySeatId(seatId);
 		if(showSeat == null) {
 			throw new SeatNotFoundException("no seat found with seatId: " + seatId);

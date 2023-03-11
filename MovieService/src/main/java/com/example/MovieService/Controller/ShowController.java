@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.MovieService.entity.Show;
+import com.example.MovieService.exception.ShowNotFoundException;
 import com.example.MovieService.service.ShowService;
 
 import ch.qos.logback.classic.Logger;
@@ -24,18 +25,10 @@ public class ShowController {
 
 	Logger logger = (Logger) LoggerFactory.getLogger(ShowController.class);
 
-//	@GetMapping("/getShowsByMovieId/{movieId}")
-//	public List<Show> getShowsByMovieId(@PathVariable("movieId") int movieId) {
-//
-//		List<Show> shows = showService.getShowsByMovieId(movieId);
-//		logger.info("---------shows fetched for movieid: " + movied + "------------");
-//		return shows.stream().collect(Collectors.toSet()).stream().toList();
-//	}
-
 	
 	@GetMapping("/getShowsByMovieTheatreAndTime/{movieId}/{theatreId}")
 	public List<Show> getShowsByMovieAndTheatre(@PathVariable("movieId") int movieId,
-			@PathVariable("theatreId") int theatreId) {
+			@PathVariable("theatreId") int theatreId) throws ShowNotFoundException {
 		
 		List<Show> shows = showService.getShowsByMovieAndTheatre(movieId, theatreId);
 		logger.info("---------shows fetched for movieId: " + movieId + " theatreId: " + theatreId + "------------");
@@ -55,7 +48,7 @@ public class ShowController {
 	
 
 	@GetMapping("/shows/{showId}")
-	public Show getShowById(@PathVariable Integer showId) {
+	public Show getShowById(@PathVariable Integer showId) throws ShowNotFoundException {
 		return showService.getShowById(showId);
 	}
 

@@ -12,7 +12,7 @@ import com.example.MovieService.entity.Seats;
 @Repository
 public interface SeatRepository extends JpaRepository<Seats, Integer> {
 
-	@Query(value = "SELECT * FROM shows,showseatmapping,seats where shows.show_id = showseatmapping.showid_fk  and showseatmapping.show_seat_id = seats.seat_id and shows.screenid_fk = seats.scseid__fk and shows.show_id =:showId and shows.time =:time", nativeQuery = true)
-	List<Seats> getSeats(@Param("showId") Integer showId, @Param("time") String time);
+	@Query(value = "SELECT * FROM shows,showseatmapping,seats where shows.show_id = showseatmapping.showid_fk  and showseatmapping.show_seat_id = seats.seat_id and shows.screenid_fk = seats.scseid__fk and shows.show_id =:showId", nativeQuery = true)
+	List<Seats> getSeats(@Param("showId") Integer showId);
 
 }
