@@ -25,12 +25,7 @@ public class MovieService {
 	
 
 	public Movies getMovieShowById(Integer id) throws MovieNotFoundException {
-	Movies movie = movieRepo.findById(id).get();
-	if(movie == null) {
-		throw new MovieNotFoundException("no movie with id = " + id + " found");
-	}
-	return movie;
-		
+	return movieRepo.findById(id).orElseThrow(() -> new MovieNotFoundException("no movie with id = " + id + " found"));		
 	}
 
 	

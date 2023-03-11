@@ -11,7 +11,7 @@ import com.example.demo.entity.User;
 @Repository
 public interface UserRepo extends JpaRepository<User, String> {
 
-	//@Query(value = "select * from user_table where user_name = ?1", nativeQuery = true)
+
 	Optional<User> findByUserName(String userName);
 
 }

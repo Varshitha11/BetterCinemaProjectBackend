@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Role;
 import com.example.demo.entity.User;
+import com.example.demo.exceptions.UserNotFoundException;
 import com.example.demo.repository.RoleRepo;
 import com.example.demo.repository.UserRepo;
 
@@ -48,12 +49,22 @@ public class UserService {
 		return passwordEncoder.encode(password);
 	}
 
-	public Optional<User> getUserByUserName(String userName) {
-		return userRepo.findByUserName(userName);
+	public Optional<User> getUserByUserName(String userName) throws UserNotFoundException {
+		Optional<User> user = userRepo.findByUserName(userName);
+		if(user.isEmpty()) {
+			throw new UserNotFoundException(" No user found with username: "+userName);
+		}
+		return user;
+
 	}
 
-	public List<User> getAllUsers() {
-		return userRepo.findAll();
+	public List<User> getAllUsers() throws UserNotFoundException {
+		List<User> usersList = userRepo.findAll();
+		if (usersList.isEmpty()) {
+			throw new UserNotFoundException("Hey users list is empty");
+		}
+		return usersList;
+
 	}
 
 }
