@@ -12,10 +12,7 @@ import com.example.MovieService.entity.Screen;
 @Repository
 public interface ScreenRepository extends JpaRepository<Screen, Integer> {
 
-	@Query(value = "select * from screen,theatre where screen.thscid_fk = theatre.theatre_id and theatre.theatre_id=:theatreId", nativeQuery = true)
-	List<Screen> getScreensFromTheatre(@Param("theatreId") Integer theatreId);
-
 	@Query(value = "  select * from shows,screen where shows.screenid_fk = screen.screen_id and shows.show_id =:showId", nativeQuery = true)
-	Screen getScreenFromShowAndTime(@Param("showId") Integer showId);
+	Screen getScreenFromShow(@Param("showId") Integer showId);
 
 }

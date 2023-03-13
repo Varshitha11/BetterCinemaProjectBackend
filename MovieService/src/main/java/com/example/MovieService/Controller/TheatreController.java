@@ -27,15 +27,6 @@ public class TheatreController {
 
 	Logger logger = (Logger) LoggerFactory.getLogger(TheatreController.class);
 
-	@PostMapping("/addTheatre")
-	public Theatre addTheatre(@RequestBody Theatre theatre) {
-		
-		Theatre addTheatre = theatreService.addTheatres(theatre);
-        logger.info("---------Theatres added succesfully------------");
-		return addTheatre;
-	}
-
-	
 	@GetMapping("/getAllTheatres")
 	public List<Theatre> getAllTheatres() throws TheatreNotFoundException {
 		

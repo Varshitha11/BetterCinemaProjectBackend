@@ -23,9 +23,4 @@ public class SeatService {
 		}
 		return seats;
 	}
-
-	public Seats getSeatsById(Integer seatId) throws SeatNotFoundException {
-		return seatRepo.findById(seatId).orElseThrow(() -> new SeatNotFoundException("No Seat found with seatId = " + seatId));
-	}
-
 }

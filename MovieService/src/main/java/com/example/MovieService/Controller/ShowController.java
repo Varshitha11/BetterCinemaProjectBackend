@@ -45,11 +45,5 @@ public class ShowController {
 				+ "------------");
 		return shows.stream().collect(Collectors.toSet()).stream().toList();
 	}
-	
-
-	@GetMapping("/shows/{showId}")
-	public Show getShowById(@PathVariable Integer showId) throws ShowNotFoundException {
-		return showService.getShowById(showId);
-	}
 
 }

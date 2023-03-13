@@ -34,12 +34,4 @@ public class SeatController {
 		return seats.stream().collect(Collectors.toSet()).stream().toList();
 	}
 
-	
-	@GetMapping("/seats/{seatId}")
-	public Seats getSeatsById(@PathVariable Integer seatId) throws SeatNotFoundException {
-
-		logger.info("----seats fetched for seatId: " + seatId + "---- ");
-		return seatService.getSeatsById(seatId);
-	}
-
 }

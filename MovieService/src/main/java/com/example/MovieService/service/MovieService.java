@@ -24,7 +24,7 @@ public class MovieService {
 	}
 	
 
-	public Movies getMovieShowById(Integer id) throws MovieNotFoundException {
+	public Movies getMovieById(Integer id) throws MovieNotFoundException {
 	return movieRepo.findById(id).orElseThrow(() -> new MovieNotFoundException("no movie with id = " + id + " found"));		
 	}
 
@@ -36,17 +36,6 @@ public class MovieService {
 		}
 		return movies;
 	}
-
-	
-	public Movies saveMovie(Movies movie) throws MovieNotFoundException {
-
-		if (movie.getTitle().isEmpty() || movie.getDescription().isEmpty() || movie.getLanguage().isEmpty()
-				|| movie.getImage().isEmpty()) {
-			throw new MovieNotFoundException("Input fields are empty");
-		}
-		return movieRepo.save(movie);
-	}
-	
 
 	public List<Movies> getMoviesByTheatre(Integer theatreId) throws MovieNotFoundException {
 		List<Movies> movies = movieRepo.getMoviesByTheatre(theatreId);
@@ -63,16 +52,6 @@ public class MovieService {
 			throw new MovieNotFoundException("no movie found with time = " + time);
 		}
 		return movies;
-	}
-
-	
-	public Movies getMoviesByShowAndTime(Integer showId) throws MovieNotFoundException {
-		Movies movie = movieRepo.getMoviesByShowAndTime(showId);
-		if (movie == null) {
-			throw new MovieNotFoundException("no movie found with showId: " + showId);
-		}
-		return movie;
-
 	}
 
 }

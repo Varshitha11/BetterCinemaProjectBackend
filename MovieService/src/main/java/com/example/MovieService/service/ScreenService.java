@@ -15,16 +15,8 @@ public class ScreenService {
 	@Autowired
 	private ScreenRepository screenRepo;
 
-	public List<Screen> getScreenFromTheatre(Integer theatreId) throws ScreenNotFoundException {
-		List<Screen> screen = screenRepo.getScreensFromTheatre(theatreId);
-		if (screen.isEmpty()) {
-			throw new ScreenNotFoundException("no Screen found with theatreId: " + theatreId);
-		}
-		return screen;
-	}
-
-	public Screen getScreenFromShowAndTime(Integer showId) throws ScreenNotFoundException {
-		Screen screen = screenRepo.getScreenFromShowAndTime(showId);
+	public Screen getScreenFromShow(Integer showId) throws ScreenNotFoundException {
+		Screen screen = screenRepo.getScreenFromShow(showId);
 		if (screen == null) {
 			throw new ScreenNotFoundException("no screen found with showId: " + showId );
 		}

@@ -29,10 +29,4 @@ public class ShowService {
 		List<Show> shows = showRepository.getShowsByMovieTheatreAndTime(movieId, theatreId, time);
 		return shows;
 	}
-
-	public Show getShowById(Integer showId) throws ShowNotFoundException {
-		return showRepository.findById(showId)
-				.orElseThrow(() -> new ShowNotFoundException("No Show found with id = " + showId));
-	}
-
 }

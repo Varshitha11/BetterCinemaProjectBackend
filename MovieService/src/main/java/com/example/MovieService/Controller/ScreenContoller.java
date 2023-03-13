@@ -25,20 +25,11 @@ public class ScreenContoller {
 
 	Logger logger = (Logger) LoggerFactory.getLogger(ScreenContoller.class);
 
-	@GetMapping("/getScreensFromTheatre/{theatreId}")
-	public List<Screen> getScreenFromTheatre(@PathVariable("theatreId") int theatreId) throws ScreenNotFoundException {
-		
-		List<Screen> screen = screenService.getScreenFromTheatre(theatreId);
-		logger.info("---screen fetched with theatreId: " + theatreId + "---");
-		return screen.stream().collect(Collectors.toSet()).stream().toList();
-	}
-
-	
-	@GetMapping("/getScreenFromShowAndTime/{showId}")
-	public Screen getScreenFromShowAndTime(@PathVariable("showId") int showId) throws ScreenNotFoundException {
+	@GetMapping("/getScreenFromShow/{showId}")
+	public Screen getScreenFromShow(@PathVariable("showId") int showId) throws ScreenNotFoundException {
 
 		logger.info("---------screen fetched with showId: " + showId );
-		return screenService.getScreenFromShowAndTime(showId);
+		return screenService.getScreenFromShow(showId);
 
 	}
 

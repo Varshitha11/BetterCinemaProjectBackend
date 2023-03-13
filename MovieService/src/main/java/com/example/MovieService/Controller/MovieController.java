@@ -38,9 +38,9 @@ public class MovieController {
 	
 
 	@GetMapping("/movies/{id}")
-	public Movies getMovieShowById(@PathVariable Integer id) throws MovieNotFoundException {
+	public Movies getMovieById(@PathVariable Integer id) throws MovieNotFoundException {
 		
-       Movies movie = movieService.getMovieShowById(id);
+       Movies movie = movieService.getMovieById(id);
 			logger.info("---movie fetched with id: " + id + "---");
 		return  movie;
 	}
@@ -50,15 +50,6 @@ public class MovieController {
 	List<Movies> getAllMovies() throws MovieNotFoundException {
 		return movieService.getAllMovies();
 	}
-	
-
-	@PostMapping("/addMovie")
-	public Movies addMovie(@RequestBody Movies movie) throws MovieNotFoundException {
-		
-		Movies saveMovie = movieService.saveMovie(movie);
-		return saveMovie;
-	}
-
 	
 	@GetMapping("/getMoviesByTheatreId/{theatreId}")
 	public List<Movies> getMoviesByTheatreId(@PathVariable("theatreId") int theatreId) throws MovieNotFoundException {
@@ -75,13 +66,6 @@ public class MovieController {
 		List<Movies> movies = movieService.getMoviesByTime(time);
 		logger.info("-----------movie fetched by time: " + time + "----------");
 		return movies.stream().collect(Collectors.toSet()).stream().toList();
-	}
-
-	
-	@GetMapping("/getMoviesByShowAndTime/{showId}")
-	public Movies getMoviesByShowAndTime(@PathVariable("showId") Integer showId) throws MovieNotFoundException {
-		
-		return movieService.getMoviesByShowAndTime(showId);
 	}
 
 }

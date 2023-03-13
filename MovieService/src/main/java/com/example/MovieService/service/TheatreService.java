@@ -23,11 +23,6 @@ public class TheatreService {
 		return theatres;
 	}
 
-	public Theatre addTheatres(Theatre theatre) {
-		return theatreRepository.save(theatre);
-
-	}
-
 	public Theatre getTheatreById(Integer theatreId) throws TheatreNotFoundException {
 		return theatreRepository.findById(theatreId)
 				.orElseThrow(() -> new TheatreNotFoundException("No such theatre with id = " + theatreId));
