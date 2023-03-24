@@ -20,20 +20,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name = "screen")
 public class Screen {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int screenId;
 	private String screenName;
 	private int totalNoOfSeats;
-	
+
 	@OneToMany(targetEntity = Show.class, cascade = CascadeType.ALL)
 	@JoinColumn(name = "screenid_fk", referencedColumnName = "screenId")
 	private List<Show> shows;
-	
+
 	@OneToMany(targetEntity = Seats.class, cascade = CascadeType.ALL)
 	@JoinColumn(name = "scseid__fk", referencedColumnName = "screenId")
 	private List<Seats> seats;
-	
-	
+
 }

@@ -21,14 +21,14 @@ public class ShowSeatMappingController {
 	@Autowired
 	private ShowSeatMappingService showSeatService;
 
-	@PostMapping("/bookTickets/{seatId}/{showId}")
+	@PostMapping("/bookTickets/{seatId}/{showId}/{userName}")
 	public ResponseEntity<Object> bookTickets(@RequestBody ShowSeatMapping showSeatMap,
-			@PathVariable("seatId") Integer seatId, @PathVariable("showId") Integer showId) {
+			@PathVariable("seatId") Integer seatId, @PathVariable("showId") Integer showId, @PathVariable("userName") String userName) {
 		
 		if (showSeatService.checkIfSeaEmpty(seatId) == "NotAvailable") {
 			return new ResponseEntity<>("Seats are filled", HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<>(showSeatService.bookSeat(seatId, showId), HttpStatus.CREATED);
+		return new ResponseEntity<>(showSeatService.bookSeat(seatId, showId,userName), HttpStatus.CREATED);
 	}
 	
 

@@ -20,16 +20,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name = "seats")
 public class Seats {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int seatId;
 	private int seatNumber;
-	
+
 	@OneToMany(targetEntity = ShowSeatMapping.class, cascade = CascadeType.ALL)
 	@JoinColumn(name = "stid_fk", referencedColumnName = "seatId")
 	private List<ShowSeatMapping> showSeatMapping;
-
-	
 
 }

@@ -27,7 +27,6 @@ public class MovieController {
 	private MovieService movieService;
 
 	Logger logger = (Logger) LoggerFactory.getLogger(MovieController.class);
-	
 
 	@GetMapping("/movie/{title}")
 	public List<Movies> getMovieByTitle(@PathVariable("title") String title) throws MovieNotFoundException {
@@ -39,10 +38,10 @@ public class MovieController {
 
 	@GetMapping("/movies/{id}")
 	public Movies getMovieById(@PathVariable Integer id) throws MovieNotFoundException {
-		
-       Movies movie = movieService.getMovieById(id);
-			logger.info("---movie fetched with id: " + id + "---");
-		return  movie;
+
+		Movies movie = movieService.getMovieById(id);
+		logger.info("---movie fetched with id: " + id + "---");
+		return movie;
 	}
 	
 
@@ -50,7 +49,7 @@ public class MovieController {
 	List<Movies> getAllMovies() throws MovieNotFoundException {
 		return movieService.getAllMovies();
 	}
-	
+
 	@GetMapping("/getMoviesByTheatreId/{theatreId}")
 	public List<Movies> getMoviesByTheatreId(@PathVariable("theatreId") int theatreId) throws MovieNotFoundException {
 
@@ -59,13 +58,18 @@ public class MovieController {
 		return movies.stream().collect(Collectors.toSet()).stream().toList();
 	}
 
-	
 	@GetMapping("/SearchByTime/{time}")
 	public List<Movies> searchByTime(@PathVariable("time") String time) throws MovieNotFoundException {
-		
+
 		List<Movies> movies = movieService.getMoviesByTime(time);
 		logger.info("-----------movie fetched by time: " + time + "----------");
 		return movies.stream().collect(Collectors.toSet()).stream().toList();
+	}
+
+	@GetMapping("/moviesByUserName/{userName}")
+	public List<Movies> getMoviesByUserName(@PathVariable("userName") String userName) {
+		List<Movies> movies = movieService.getMoviesByUserName(userName);
+		return movies;
 	}
 
 }

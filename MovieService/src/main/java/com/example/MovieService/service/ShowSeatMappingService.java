@@ -1,7 +1,11 @@
 package com.example.MovieService.service;
 
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.example.MovieService.Repo.BookingRepository;
 import com.example.MovieService.Repo.PaymentRepository;
@@ -12,6 +16,7 @@ import com.example.MovieService.entity.Payment;
 import com.example.MovieService.entity.Seats;
 import com.example.MovieService.entity.Show;
 import com.example.MovieService.entity.ShowSeatMapping;
+import com.example.MovieService.entity.User;
 import com.example.MovieService.exception.MovieNotFoundException;
 import com.example.MovieService.exception.SeatNotFoundException;
 
@@ -38,7 +43,7 @@ public class ShowSeatMappingService {
 		return "notavailable";
 	}
 
-	public Payment bookSeat(Integer seatId, Integer showId) {
+	public Payment bookSeat(Integer seatId, Integer showId,String userName) {
 		ShowSeatMapping showSeatMapping = showSeatRepo.getById(seatId);
 		try {
 			showSeatRepo.setSeatById(seatId);
@@ -50,14 +55,19 @@ public class ShowSeatMappingService {
 		}
 
 		showSeatRepo.save(showSeatMapping);
-
+		
 		double amount = 0;
-
 		Show show = showRepo.findById(showId).get();
+		show.setShowId(showId);
 		Payment payment = new Payment();
-
+        
+		User user = new User();
+        user.setUserName(userName);
 		Booking booking = new Booking(); // booking.setNumberOfSeats(seatId);
 		booking.setStatus("booked");
+		booking.setUser(user);
+		booking.setNumberOfSeats(1);
+		booking.setShow(show);
 		bookingRepo.save(booking);
 
 		amount += showSeatMapping.getPrice();
@@ -65,6 +75,7 @@ public class ShowSeatMappingService {
 		payment.setAmount(amount);
 		payment.setBooking(booking);
 		paymentRepo.save(payment);
+		
 
 		return payment;
 

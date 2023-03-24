@@ -25,21 +25,19 @@ public class ShowController {
 
 	Logger logger = (Logger) LoggerFactory.getLogger(ShowController.class);
 
-	
 	@GetMapping("/getShowsByMovieTheatreAndTime/{movieId}/{theatreId}")
 	public List<Show> getShowsByMovieAndTheatre(@PathVariable("movieId") int movieId,
 			@PathVariable("theatreId") int theatreId) throws ShowNotFoundException {
-		
+
 		List<Show> shows = showService.getShowsByMovieAndTheatre(movieId, theatreId);
 		logger.info("---------shows fetched for movieId: " + movieId + " theatreId: " + theatreId + "------------");
 		return shows.stream().collect(Collectors.toSet()).stream().toList();
 	}
-	
 
 	@GetMapping("/getShowsByMovieTheatreAndTime/{movieId}/{theatreId}/{time}")
 	public List<Show> getShowsByMovieTheatreAndTime(@PathVariable("movieId") int movieId,
 			@PathVariable("theatreId") Integer theatreId, @PathVariable("time") String time) {
-		
+
 		List<Show> shows = showService.getShowsByMovieTheatreAndTime(movieId, time, theatreId);
 		logger.info("---------shows fetched for movieid: " + movieId + " theatreId: " + theatreId + " time: " + time
 				+ "------------");

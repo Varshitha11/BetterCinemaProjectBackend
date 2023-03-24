@@ -28,7 +28,7 @@ public class ScreenContoller {
 	@GetMapping("/getScreenFromShow/{showId}")
 	public Screen getScreenFromShow(@PathVariable("showId") int showId) throws ScreenNotFoundException {
 
-		logger.info("---------screen fetched with showId: " + showId );
+		logger.info("---------screen fetched with showId: " + showId);
 		return screenService.getScreenFromShow(showId);
 
 	}

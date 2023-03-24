@@ -11,7 +11,10 @@ import com.example.MovieService.entity.Booking;
 @Repository
 public interface BookingRepository extends JpaRepository<Booking, Integer> {
 
-	@Query(value = "select * from booking where user_id =(select id from user_table where user_name = ?1", nativeQuery = true)
+	@Query(value = "select * from user_table,booking where user_table.user_name = booking.user_id and booking.user_id =: userName", nativeQuery = true)
 	List<Booking> findByUserName(String userName);
+	
+	@Query(value = "select * from bookings where user_id = :userName", nativeQuery = true)
+	List<Booking> findBookings(String userName);
 
 }

@@ -17,9 +17,9 @@ public class SeatService {
 
 	public List<Seats> getSeats(Integer showId) throws SeatNotFoundException {
 		List<Seats> seats = seatRepo.getSeats(showId);
-	    System.out.println(seats.size());
+		System.out.println(seats.size());
 		if (seats.isEmpty()) {
-			throw new SeatNotFoundException("Seats not found with showId: " + showId );
+			throw new SeatNotFoundException("Seats not found with showId: " + showId);
 		}
 		return seats;
 	}

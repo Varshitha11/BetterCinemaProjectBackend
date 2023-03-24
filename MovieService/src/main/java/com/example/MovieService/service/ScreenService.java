@@ -18,7 +18,7 @@ public class ScreenService {
 	public Screen getScreenFromShow(Integer showId) throws ScreenNotFoundException {
 		Screen screen = screenRepo.getScreenFromShow(showId);
 		if (screen == null) {
-			throw new ScreenNotFoundException("no screen found with showId: " + showId );
+			throw new ScreenNotFoundException("no screen found with showId: " + showId);
 		}
 		return screen;
 	}

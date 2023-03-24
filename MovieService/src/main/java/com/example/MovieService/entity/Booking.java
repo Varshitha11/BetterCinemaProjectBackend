@@ -19,21 +19,25 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Data
-@Table(name = "booking")
+@Table(name = "bookings")	
 public class Booking {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int bookingId;
 	private int numberOfSeats;
 	private String status;
-	
+
 	@OneToMany(targetEntity = ShowSeatMapping.class, cascade = CascadeType.ALL)
 	@JoinColumn(name = "ssmId_fk", referencedColumnName = "bookingId")
 	private List<ShowSeatMapping> showSeatMappings;
-	
+
 	@ManyToOne(targetEntity = User.class)
-    @JoinColumn(name = "userId")
-    private User user;
+	@JoinColumn(name = "userId")
+	private User user;
+
+	@ManyToOne(targetEntity = Show.class)
+	@JoinColumn(name = "show_id_fk")
+	private Show show;
 
 }

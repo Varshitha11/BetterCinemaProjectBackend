@@ -14,23 +14,21 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "theatre")
 public class Theatre {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int theatreId;
 	private String theatreName;
 	private String city;
-	
+
 	@OneToMany(targetEntity = Screen.class, cascade = CascadeType.ALL)
 	@JoinColumn(name = "thscid_fk", referencedColumnName = "theatreId")
 	private List<Screen> screens;
-
 
 }

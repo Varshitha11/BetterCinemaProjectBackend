@@ -1,4 +1,5 @@
 package com.example.MovieService.entity;
+
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -19,23 +20,21 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "movie")
 public class Movies {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	
+
 	private String title;
-    
+
 	private String description;
-    
-    private String language;
-    
+
+	private String language;
+
 	private String image;
-	
+
 	@OneToMany(targetEntity = Show.class, cascade = CascadeType.ALL)
 	@JoinColumn(name = "movieId", referencedColumnName = "id")
 	private List<Show> shows;
-	
 
-	
 }

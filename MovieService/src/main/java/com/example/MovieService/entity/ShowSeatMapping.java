@@ -15,12 +15,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name = "showseatmapping")
 public class ShowSeatMapping {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int showSeatId;
 	private String status;
 	private double price;
-	
-	
+
 }

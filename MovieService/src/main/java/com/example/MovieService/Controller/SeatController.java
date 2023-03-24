@@ -25,7 +25,6 @@ public class SeatController {
 
 	Logger logger = (Logger) LoggerFactory.getLogger(SeatController.class);
 
-	
 	@GetMapping("/getSeats/{showId}")
 	public List<Seats> getSeats(@PathVariable("showId") Integer showId) throws SeatNotFoundException {
 

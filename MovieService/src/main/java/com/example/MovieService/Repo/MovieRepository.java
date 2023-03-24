@@ -20,4 +20,7 @@ public interface MovieRepository extends JpaRepository<Movies, Integer> {
 
 	@Query(value = " SELECT * FROM movie,shows where movie.id = shows.movie_id and shows.time=:time", nativeQuery = true)
 	List<Movies> findMovieByTime(String time);
+	
+	@Query(value = " select * from movie ,shows ,bookings where movie.id = shows.movie_id and shows.show_id = bookings.show_id_fk and   bookings.user_id = :userName ", nativeQuery = true)
+	List<Movies> findMovieByUserName(String userName);
 }

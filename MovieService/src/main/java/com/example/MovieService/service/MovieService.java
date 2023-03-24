@@ -53,5 +53,10 @@ public class MovieService {
 		}
 		return movies;
 	}
+	
+	public List<Movies> getMoviesByUserName(String userName){
+		List<Movies> movies = movieRepo.findMovieByUserName(userName);
+		return movies;
+	}
 
 }

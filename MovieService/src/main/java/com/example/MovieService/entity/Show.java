@@ -32,12 +32,4 @@ public class Show {
 	@JoinColumn(name = "showid_fk", referencedColumnName = "showId")
 	private List<ShowSeatMapping> showSeatMappings;
 	
-	@OneToMany(targetEntity = Booking.class, cascade = CascadeType.ALL)
-	@JoinColumn(name = "shbkid_fk", referencedColumnName = "showId")
-	private List<Booking> bookings;
-
-	
-	
-
-
 }
